@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head_title %} 
+{{instance.title}} || {{block.super}} 
+{% endblock head_title %}
+
+{% block content %} 
+
+
+<div class='col-sm-6 col-sm-offset-3' style="margin: auto;">
+	<h1>{{ title }}</h1>
+	
+	<img style=" border-radius: 20px;height: 200px; margin: auto; margin-bottom: 5px; margin-top: 15px;" src="{{ instance.image.url }}" class="img-responsive"/>
+
+	<h3>{{ instance.fullname }}</h3><br/>
+	<p>Nickname:    {{ instance.nickname }}</p><br/>
+	<p>Phone No:    {{ instance.phone }}</p><br/>
+	<p>Email:		{{ instance.email }}</p><br/>
+	<p>Address:     {{ instance.address }}</p><br/>
+
+	<a href="/contacts/{{instance.id}}/edit" class="btn btn-primary" role="Edit">Edit</a>
+
+	 <a href="/contacts/{{instance.id}}/delete/" class="btn btn-danger" role="Edit">Delete</a>
+
+		
+	</h2>
+
+
+</div>
+
+{% endblock content %} 

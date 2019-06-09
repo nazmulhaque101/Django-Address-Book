@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-sm-6 col-sm-offset-3" style="margin: auto;">
+<h1 style="color:#C0C0C0; text-align: center;" class="center">{{ title }}  </h1>
+
+
+<form method="GET" action='' >
+	<input type="text" class="form-control"  name="q" placeholder="Search Contacts" value="{{request.GET.q}}" style="margin: auto;" />
+	<input type="submit" value='Search' class="btn btn-dark" style="margin: 20px 50% 20px 45%"/>
+
+</form>
+
+{% for obj in object_list %}
+	<div class="row">
+		{% if obj.image %}
+		<img style=" border-radius: 20px;height: 200px; margin: auto; margin-bottom: 5px; margin-top: 15px;" src="{{ obj.image.url }}" class="img-responsive"/>
+		<!-- <div class='col-sm-12'> --> </br>
+		{% endif %}
+
+	  <div class="col-sm-12">
+		    <div class="thumbnail">
+		      <!-- <img src="..." alt="..."> -->
+			      <div class="caption">
+			        <h3>
+			        <a href='/contacts/{{obj.id}}/'>{{obj.fullname}}</a>
+			    	</h3>
+			        <p>
+			        Phone: {{obj.phone}}</br>
+			        Email: {{obj.email}}
+			    	</p>
+
+			        <p>
+				        <a href="/contacts/{{obj.id}}/" class="btn btn-success" role="button">Details</a> 
+
+				        <a href="/contacts/{{obj.id}}/edit" class="btn btn-primary" role="Edit">Edit</a>
+
+				        <a href="/contacts/{{obj.id}}/delete/" class="btn btn-danger" role="Edit">Delete</a>
+				    	</p>
+	        
+			      </div>
+		    </div>
+	  </div>
+	</div>
+
+{% endfor %}
+
+</hr>
+</hr>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?page=1">&laquo; First</a>
+            <a href="?page={{ object_list.previous_page_number }}">&laquo;  Previous </a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}">Next &raquo;</a>
+            <a href="?page={{ object_list.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+</div>
+
+<!-- thumbnail bootstrap copy 26" 5:20 -->
+<!--  -->
+<!-- copy pagination code -->
+{% endblock content %}
